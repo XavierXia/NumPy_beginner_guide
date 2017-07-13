@@ -7,10 +7,13 @@
 
 ## 第一部分:环境准备和数据准备
 建议在使用 numpy,scipy等相关python库时直接安装集成环境:
+
 [anaconda](https://www.continuum.io/anaconda-overview)
+
 以减少手动安装各种库带来的不便
 
 数据准备方面,我直接调用tushare库来获取A股中某个个股的历史交易数据,代码如下:
+
 `
 import tushare as ts
 df = ts.get_hist_data('000001',start='2013-01-05',end='2017-01-09')
