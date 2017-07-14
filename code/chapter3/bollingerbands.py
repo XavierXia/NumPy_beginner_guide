@@ -19,10 +19,12 @@ from matplotlib.pyplot import show
 		print str[-3:-1] #截取倒数第三位与倒数第一位之前的字符
 		print str[-3:] #截取倒数第三位到结尾
 		print str[:-5:-3] #逆序截取
+	3. 卷积,在泛函分析中，卷积、旋积或摺积(英语：Convolution)是通过两个函数f和g生成第三个函数的一种数学算子，
+	表征函数f 与g经过翻转和平移的重叠部分的面积,如果将参加卷积的一个函数看作区间的指示函数，卷积还可以被看作是“滑动平均”的推广。
 '''
 
 #N = int(sys.argv[1])
-N = 100
+N = 5
 
 weights = np.ones(N)/N
 #print "Weights ",weights
