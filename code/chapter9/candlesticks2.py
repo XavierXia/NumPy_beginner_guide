@@ -20,6 +20,8 @@ from matplotlib.finance import candlestick2
 2. 进入/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib中找到finance.py
 3. 查看finance.py中使用了candlestick2还是candlestick2_ochl。
 4. 调用存在的函数即可。
+
+后面有优化，见candlesticks3.py
 '''
 
 alldays = DayLocator()
