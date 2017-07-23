@@ -7,7 +7,7 @@ from matplotlib.dates import MonthLocator
 import sys
 from datetime import datetime
 import matplotlib.pyplot as plt
-from matplotlib.finance import candlestick2
+from matplotlib.finance import candlestick
 
 '''
 调了大半天，终于成功了，主要原因还是在系统调用的matplotlib.finance代码版本不兼容造成的，
@@ -20,18 +20,21 @@ from matplotlib.finance import candlestick2
 2. 进入/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/matplotlib中找到finance.py
 3. 查看finance.py中使用了candlestick2还是candlestick2_ochl。
 4. 调用存在的函数即可。
+
+现在显示出来的效果也是差强人意，后面会对此优化，效果要达到实盘效果。
 '''
+
+def datestr2num(s):
+	return datetime.strptime(s,"%Y-%m-%d").date().toordinal()
 
 alldays = DayLocator()
 months = MonthLocator()
 month_formatter = DateFormatter("%b %Y")
 
 #获取股票数据
-opens,close,high,low = np.loadtxt('../chapter3/data.csv',delimiter=',',usecols=(1,2,3,4),unpack=True)
-opens = opens[::-1]
-close = close[::-1]
-high = high[::-1]
-low = low[::-1]
+data = np.loadtxt('../chapter3/data.csv',delimiter=',',usecols=(0,1,2,3,4),converters={0:datestr2num},unpack=False)
+print "data: ", data[:5]
+data = data[::-1]
 
 #绘图组件的顶层容器
 fig = plt.figure()
@@ -44,8 +47,7 @@ ax.xaxis.set_minor_locator(alldays)
 ax.xaxis.set_major_formatter(month_formatter)
 
 #绘制K线图
-candlestick2(ax, opens,close,high,low,width=1, colorup='r', colordown='g', alpha=1)
-#candlestick2(ax, opens,close,high,low)
+candlestick(ax,data,width=1, colorup='r', colordown='b', alpha=1.0)
 
 #将x轴上的标签格式化日期
 fig.autofmt_xdate()

@@ -3,8 +3,8 @@
 from matplotlib.dates import DateFormatter
 from matplotlib.dates import DayLocator
 from matplotlib.dates import MonthLocator
-from matplotlib.finance import quotes_historical_yahoo_ochl
-from matplotlib.finance import candlestick_ochl
+from matplotlib.finance import quotes_historical_yahoo
+from matplotlib.finance import candlestick
 import sys
 from datetime import date
 import matplotlib.pyplot as plt
@@ -27,8 +27,8 @@ symbol = '^GSPC'
 #	symbol = sys.argv[1]
 
 #获取股票数据
-#quotes = quotes_historical_yahoo(symbol, start, today)
-quotes = quotes_historical_yahoo_ochl(symbol, start, today,asobject=True, adjusted=True)
+quotes = quotes_historical_yahoo(symbol, start, today)
+#quotes = quotes_historical_yahoo_ochl(symbol, start, today,asobject=True, adjusted=True)
 print "quotes: ",quotes[:2]
 
 #绘图组件的顶层容器
@@ -42,7 +42,8 @@ ax.xaxis.set_minor_locator(alldays)
 ax.xaxis.set_major_formatter(month_formatter)
 
 #绘制K线图
-candlestick_ochl(ax, quotes)
+#candlestick_ochl(ax, quotes)
+candlestick(ax, quotes)
 #将x轴上的标签格式化日期
 fig.autofmt_xdate()
 plt.show()
